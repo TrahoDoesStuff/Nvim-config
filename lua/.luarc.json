@@ -1,7 +1,8 @@
 {
     "diagnostics.globals": [
         "vim",
-        "maplocalleader"
+        "maplocalleader",
+        "on_attach"
     ],
     "diagnostics.disable": [
         "undefined-global"
