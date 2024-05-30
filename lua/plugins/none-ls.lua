@@ -9,6 +9,7 @@ return {
 				null_ls.builtins.formatting.clang_format,
 				null_ls.builtins.formatting.gdformat,
 				null_ls.builtins.formatting.bibclean,
+        null_ls.builtins.formatting.gdformat,
 			},
 		})
 
