@@ -1,4 +1,4 @@
-local theme = "catppuccin"
+local theme = "nord"
 
 print("Load theme: " .. theme)
 
@@ -16,13 +16,24 @@ end
 
 if theme == "nord" then
 	return {
-    "gbprod/nord.nvim",
-    lazy = false,
-    priority = 1000,
+		"shaunsingh/nord.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme("nord")
+			vim.g.nord_disable_background = true
 
-    config = function()
-      require("nord").setup({})
-      vim.cmd.colorscheme("nord")
-    end,
-  }
+			local highlights = require("nord").bufferline.highlights({
+				italic = true,
+				bold = true,
+			})
+
+			require("bufferline").setup({
+				options = {
+					separator_style = "thin",
+				},
+				highlights = highlights,
+			})
+		end,
+	}
 end
