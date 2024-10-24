@@ -9,7 +9,16 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "omnisharp", "pylsp", "clangd", "jdtls", "texlab", "ast_grep", "html" , "emmet_language_server" },
+				ensure_installed = {
+					"lua_ls",
+					"omnisharp",
+					"pylsp",
+					"clangd",
+					"jdtls",
+					"texlab",
+					"html",
+					"emmet_language_server",
+				},
 			})
 		end,
 	},
@@ -64,6 +73,35 @@ return {
 			})
 			lspconfig.pylsp.setup({
 				capabilities = capabilities,
+				on_attach = on_attach,
+				filetypes = { "python" },
+				settings = {
+					configurationSources = { "flake8" },
+					formatCommand = { "black" },
+					pylsp = {
+						plugins = {
+							-- jedi_completion = {fuzzy = true},
+							-- jedi_completion = {eager=true},
+							jedi_completion = {
+								include_params = true,
+							},
+							jedi_signature_help = { enabled = true },
+							jedi = {
+								extra_paths = { "~/projects/work_odoo/odoo14", "~/projects/work_odoo/odoo14" },
+								-- environment = {"odoo"},
+							},
+							pyflakes = { enabled = true },
+							pylint = {args = {'--ignore=E501,E231', '-'}, enabled=true, debounce=200},
+							pylsp_mypy = { enabled = false },
+							pycodestyle = {
+								enabled = true,
+								ignore = { "E501", "E231", "E226", "E701" },
+								maxLineLength = 120,
+							},
+							yapf = { enabled = true },
+						},
+					},
+				},
 			})
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
@@ -72,9 +110,6 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.jdtls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.ast_grep.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.html.setup({
